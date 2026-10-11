@@ -13,7 +13,7 @@ const { createElement: h, act } = await import('react')
 const { createRoot } = await import('react-dom/client')
 const signal = initial => { let value=initial;const listeners=new Set();return {current:()=>value,subscribe:fn=>{listeners.add(fn);return()=>listeners.delete(fn)},close(){},emit(next){value=next;listeners.forEach(fn=>fn(next))}} }
 const room='settings-room'
-const defaults={bio:'I own a computer.',urls:[{value:'https://shadcn.com'},{value:'http://twitter.com/shadcn'}]}
+const defaults={bio:'I own a computer.',urls:[{value:'https://example.com'},{value:'https://example.org'}]}
 const records=[
  {room,path:'preferences/profile.md',type:'profile',fields:{...defaults,username:'shadcn',email:'m@example.com'}},
  {room,path:'preferences/account.md',type:'account',fields:{name:''}},

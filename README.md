@@ -1,23 +1,24 @@
 # Tasks
 
-Tasks grouped by status with priorities, beside a dashboard, team chats and a user list.
+A Room-backed workspace for tasks, conversations, people, dashboards and preferences.
 
-An [agents.house](https://agents.house) Template: an App over one Room. `schema.yaml` is
-the Room's schema, `starter/` holds the documents a new Room starts with and `demo/` the
-documents of its demo Site.
+## Build and test
 
-## Build
-
-```sh
-npm ci
-npm run build
-```
+Use Node.js 24.21 or newer. Run `npm ci`, then `npm run verify`.
+For development, run `npm run dev`.
 
 ## Publish
 
-Commit your change, then run `npm run publish`. It builds, then pushes `main` and the build,
-as one new commit without parents on `release`, to `origin`.
+Configure `origin` as your authenticated House App Git remote. Commit your changes,
+then run `npm run publish`. This checks the clean source tree, runs the full release
+gates, and atomically publishes current source to `main` and built assets to
+`release`. Authentication comes from your Git configuration.
 
-## License
+## Starter documents
 
-See the license files beside this README.
+`starter/` contains a small selection of the existing demonstration documents,
+at their original Room-relative paths. They validate against `schema.yaml`.
+Copy them only into a new Room; publishing does not change Room data.
+The application reads records from its writable `tasks` Room slot.
+
+License notices are in `LICENSE`, `licenses/`, and the bundled third-party notices.

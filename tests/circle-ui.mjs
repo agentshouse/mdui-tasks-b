@@ -21,14 +21,14 @@ const signal = initial => {
   return { current: () => value, subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn) }, close() {}, emit(next) { value = next; listeners.forEach(fn => fn(next)) } }
 }
 const room = 'circle-tasks-room'
-const fixture = JSON.parse(fs.readFileSync('fixtures/donor-tasks.json', 'utf8'))
+const fixture = JSON.parse(fs.readFileSync('tests/support/fixtures/donor-tasks.json', 'utf8'))
 const tasks = fixture.map((fields, index) => ({ room, path: `tasks/donor-${String(index).padStart(3, '0')}.md`, type: 'task', fields: { ...fields }, sections: { Notes: `Original Notes for ${fields.id} at ${index}.` } }))
 const duplicateTasks = tasks.filter(task => task.fields.id === 'TASK-1373')
 assert.equal(duplicateTasks.length, 2)
 duplicateTasks[1].path = 'tasks/duplicate #1373 résumé.md'
 const missingNotesTask = tasks.at(-1)
 missingNotesTask.sections = {}
-const workspace = JSON.parse(fs.readFileSync('fixtures/donor-workspace.json', 'utf8')).map(record => ({ ...record, room }))
+const workspace = JSON.parse(fs.readFileSync('tests/support/fixtures/donor-workspace.json', 'utf8')).map(record => ({ ...record, room }))
 const drafts = new Map(), saves = [], writes = [], queries = []
 let revision = 0, staleCount = 0
 let writeBarrier = null, readBarrier = null, rejectWrite = null, rejectRead = null, injectStale = null, saveFailure = null

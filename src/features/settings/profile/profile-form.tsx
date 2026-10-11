@@ -10,7 +10,7 @@ const profileFormSchema = z.object({
   bio: z.string().min(4, 'Bio must be at least 4 characters.').max(160, 'Bio must not be longer than 160 characters.'),
   urls: z.array(z.object({ value: z.url('Please enter a valid URL.') })).optional(),
 })
-const defaults = { bio: 'I own a computer.', urls: [{ value: 'https://shadcn.com' }, { value: 'http://twitter.com/shadcn' }] }
+const defaults = { bio: 'I own a computer.', urls: [{ value: 'https://example.com' }, { value: 'https://example.org' }] }
 
 export function ProfileForm() {
   const form = useSettingsDraft('profile', 'preferences/profile.md', defaults, profileFormSchema)
@@ -20,9 +20,9 @@ export function ProfileForm() {
   return <form onSubmit={form.submit} noValidate className='space-y-8'>
     <fieldset disabled={!form.ready} className='space-y-8'>
     <Field id='settings-username' label='Username' error={errors.username} description='This is your public display name. It can be your real name or a pseudonym.'>
-      <Input id='settings-username' placeholder='shadcn' value={text('username')} onChange={event => setField('username', event.target.value)} aria-invalid={!!errors.username} />
+      <Input id='settings-username' placeholder='username' value={text('username')} onChange={event => setField('username', event.target.value)} aria-invalid={!!errors.username} />
     </Field>
-    <Field id='settings-email' label='Email' error={errors.email} description='These donor demo addresses are profile choices. Email verification and account connections are not available in this app.'>
+    <Field id='settings-email' label='Email' error={errors.email} description='These example addresses are profile choices. Email verification and account connections are not available in this app.'>
       <Select value={text('email')} onValueChange={value => setField('email', value)}>
         <SelectTrigger id='settings-email' aria-invalid={!!errors.email}><SelectValue placeholder='Select an email to display' /></SelectTrigger>
         <SelectContent>{['m@example.com', 'm@google.com', 'm@support.com'].map(email => <SelectItem key={email} value={email}>{email}</SelectItem>)}</SelectContent>

@@ -22,7 +22,7 @@ try {
   assert.match(taskProvider, /Changes queued in House/)
   assert.match(taskScreen, /tasks.syncLabel && <p role=/)
   const { taskSchema, taskRowIdentity } = await import(pathToFileURL(path.join(root, 'features/tasks/data/schema.js')))
-  const demo = JSON.parse(await fs.readFile('fixtures/donor-tasks.json', 'utf8'))
+  const demo = JSON.parse(await fs.readFile('tests/support/fixtures/donor-tasks.json', 'utf8'))
   assert.equal(demo.length, 100)
   demo.forEach((task) => taskSchema.parse(task))
   assert.equal(new Set(demo.map((task) => task.id)).size, 99, 'Preserve the donor duplicate display ID')

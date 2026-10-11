@@ -12,6 +12,8 @@
     "prebuild": "node scripts/prepare-release.mjs",
     "release:check": "node scripts/check-release.mjs",
     "test:current-runtime": "node tests/current-runtime/test-tasks-native.mjs",
+    "starter:check": "node scripts/check-starter.mjs",
+    "verify": "npm test && npm ci --prefix tests/current-runtime --ignore-scripts && npm run test:current-runtime && npm run lint && npm run starter:check && npm run build && npm run release:check",
     "publish": "node publish.mjs"
   },
   "dependencies": {

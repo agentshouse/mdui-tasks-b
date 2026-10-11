@@ -10,8 +10,8 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true
 const {createElement:h,act}=await import('react'),{createRoot}=await import('react-dom/client')
 const signal=initial=>{let value=initial;const listeners=new Set();return{current:()=>value,subscribe:fn=>{listeners.add(fn);return()=>listeners.delete(fn)},close(){},emit(next){value=next;listeners.forEach(fn=>fn(next))}}}
 const room='whole-demo-room'
-let records=JSON.parse(fs.readFileSync('fixtures/donor-workspace.json')).map(record=>({...record,room}))
-const tasks=JSON.parse(fs.readFileSync('fixtures/donor-tasks.json')).map((fields,index)=>({room,path:`tasks/donor-${index}.md`,type:'task',fields}))
+let records=JSON.parse(fs.readFileSync('tests/support/fixtures/donor-workspace.json')).map(record=>({...record,room}))
+const tasks=JSON.parse(fs.readFileSync('tests/support/fixtures/donor-tasks.json')).map((fields,index)=>({room,path:`tasks/donor-${index}.md`,type:'task',fields}))
 records.push(...tasks)
 const drafts=new Map(),saves=[];let revision=0,queryCount=0
 const signals={rooms:signal([{locator:room}]),'sync-status':signal({lastCompleted:'complete',attentionRequired:[]}),'room-drafts':signal([]),'service-mode':signal('open'),'connection-refusal':signal(null),query:signal({documents:records}),tasks:signal({documents:tasks}),presentation:signal({})}
