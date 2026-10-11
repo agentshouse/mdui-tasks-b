@@ -11,7 +11,8 @@
     "test": "node tests/query-contract.test.mjs && node tests/run.mjs && node tests/pagination.mjs && node tests/draft-ui.mjs && node tests/workspace-data.mjs && node tests/workspace-ui.mjs && node src/features/settings/settings-ui.test.mjs && node tests/circle-ui.mjs && node tests/circle-native-notes.mjs",
     "prebuild": "node scripts/prepare-release.mjs",
     "release:check": "node scripts/check-release.mjs",
-    "test:current-runtime": "node tests/current-runtime/test-tasks-native.mjs"
+    "test:current-runtime": "node tests/current-runtime/test-tasks-native.mjs",
+    "publish": "node publish.mjs"
   },
   "dependencies": {
     "@agentshouse/app-bridge": "0.1.0-ce524f6608238",
