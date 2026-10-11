@@ -1,0 +1,306 @@
+task:
+  properties:
+    id:
+      type: string
+      pattern: ^TASK-[A-Z0-9]+$
+    title:
+      type: string
+    status:
+      enum:
+      - backlog
+      - todo
+      - in progress
+      - done
+      - canceled
+    label:
+      enum:
+      - bug
+      - feature
+      - documentation
+    priority:
+      enum:
+      - low
+      - medium
+      - high
+      - critical
+  required:
+  - id
+  - title
+  - status
+  - label
+  - priority
+  sections:
+    Notes:
+      kind: text
+workspace-user:
+  properties:
+    id:
+      type: string
+    firstName:
+      type: string
+    lastName:
+      type: string
+    username:
+      type: string
+    email:
+      type: string
+    phoneNumber:
+      type: string
+    status:
+      type: string
+    role:
+      type: string
+    createdAt:
+      type: string
+    updatedAt:
+      type: string
+  required:
+  - id
+  - firstName
+  - lastName
+  - username
+  - email
+  - phoneNumber
+  - status
+  - role
+  - createdAt
+  - updatedAt
+  sections: {}
+conversation:
+  properties:
+    id:
+      type: string
+    profile:
+      type: string
+    username:
+      type: string
+    fullName:
+      type: string
+    title:
+      type: string
+  required:
+  - id
+  - profile
+  - username
+  - fullName
+  - title
+  sections: {}
+integration:
+  properties:
+    name:
+      type: string
+    icon:
+      type: string
+    connected:
+      type: boolean
+    desc:
+      type: string
+  required:
+  - name
+  - icon
+  - connected
+  - desc
+  sections: {}
+dashboard:
+  properties:
+    overview:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          total:
+            type: number
+        required:
+        - name
+        - total
+    traffic:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          clicks:
+            type: number
+          uniques:
+            type: number
+        required:
+        - name
+        - clicks
+        - uniques
+    sales:
+      type: array
+      items:
+        type: object
+        properties:
+          profile:
+            type: string
+          initials:
+            type: string
+          name:
+            type: string
+          email:
+            type: string
+          amount:
+            type: string
+        required:
+        - profile
+        - initials
+        - name
+        - email
+        - amount
+    referrers:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          value:
+            type: number
+        required:
+        - name
+        - value
+    devices:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          value:
+            type: number
+        required:
+        - name
+        - value
+    revenue:
+      type: string
+    revenueChange:
+      type: string
+    subscriptions:
+      type: string
+    subscriptionsChange:
+      type: string
+    salesTotal:
+      type: string
+    salesChange:
+      type: string
+    active:
+      type: string
+    activeChange:
+      type: string
+    recentSalesDescription:
+      type: string
+    clicks:
+      type: string
+    clicksChange:
+      type: string
+    visitors:
+      type: string
+    visitorsChange:
+      type: string
+    bounce:
+      type: string
+    bounceChange:
+      type: string
+    session:
+      type: string
+    sessionChange:
+      type: string
+  required:
+  - overview
+  - traffic
+  - sales
+  - referrers
+  - devices
+  - revenue
+  - revenueChange
+  - subscriptions
+  - subscriptionsChange
+  - salesTotal
+  - salesChange
+  - active
+  - activeChange
+  - recentSalesDescription
+  - clicks
+  - clicksChange
+  - visitors
+  - visitorsChange
+  - bounce
+  - bounceChange
+  - session
+  - sessionChange
+  sections: {}
+profile:
+  properties:
+    bio:
+      type: string
+    urls:
+      type: array
+      items:
+        type: object
+        properties:
+          value:
+            type: string
+        required:
+        - value
+    username:
+      type: string
+    email:
+      type: string
+  required:
+  - bio
+  - urls
+  sections: {}
+account:
+  properties:
+    name:
+      type: string
+    dob:
+      type: string
+    language:
+      type: string
+  required:
+  - name
+  sections: {}
+notification-preferences:
+  properties:
+    communication_emails:
+      type: boolean
+    marketing_emails:
+      type: boolean
+    social_emails:
+      type: boolean
+    security_emails:
+      type: boolean
+    notificationType:
+      enum:
+      - all
+      - mentions
+      - none
+    mobile:
+      type: boolean
+  required:
+  - communication_emails
+  - marketing_emails
+  - social_emails
+  - security_emails
+  sections: {}
+chat-message:
+  properties:
+    conversation:
+      type: string
+    sender:
+      type: string
+    message:
+      type: string
+    timestamp:
+      type: string
+  required:
+  - conversation
+  - sender
+  - message
+  - timestamp
+  sections: {}

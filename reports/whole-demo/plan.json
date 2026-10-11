@@ -1,0 +1,17 @@
+{
+  "room": "r_15.v",
+  "app": "a_e.n",
+  "additive": true,
+  "documents": 572,
+  "batches": 17,
+  "types": [
+    "workspace-user",
+    "conversation",
+    "integration",
+    "dashboard",
+    "profile",
+    "account",
+    "notification-preferences",
+    "chat-message"
+  ]
+}

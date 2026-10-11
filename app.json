@@ -1,0 +1,20 @@
+{
+  "entry": "index.html",
+  "room_slots": [
+    {
+      "name": "tasks",
+      "access": "write",
+      "types": [
+        "task",
+        "workspace-user",
+        "conversation",
+        "integration",
+        "dashboard",
+        "profile",
+        "account",
+        "notification-preferences",
+        "chat-message"
+      ]
+    }
+  ]
+}

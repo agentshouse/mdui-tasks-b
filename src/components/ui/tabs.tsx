@@ -1,0 +1,7 @@
+import { createContext, useContext, useState, type HTMLAttributes, type ButtonHTMLAttributes } from 'react'
+import { cn } from '@/lib/utils'
+const Context = createContext({ value: '', change: (_value: string) => {} })
+export function Tabs({ defaultValue = '', children, className, orientation: _orientation, ...props }: HTMLAttributes<HTMLDivElement> & {defaultValue?: string; orientation?: string}) { const [value, change] = useState(defaultValue); return <Context value={{value,change}}><div className={className} {...props}>{children}</div></Context> }
+export function TabsList({className,...props}: HTMLAttributes<HTMLDivElement>) { return <div role='tablist' className={cn('inline-flex h-9 items-center rounded-lg bg-muted p-1 text-muted-foreground',className)} {...props}/> }
+export function TabsTrigger({value,className,...props}: ButtonHTMLAttributes<HTMLButtonElement> & {value:string}) { const state=useContext(Context); return <button type='button' role='tab' aria-selected={state.value===value} onClick={()=>state.change(value)} className={cn('rounded-md px-3 py-1 text-sm font-medium disabled:opacity-50',state.value===value&&'bg-background text-foreground shadow',className)} {...props}/> }
+export function TabsContent({value,children,...props}: HTMLAttributes<HTMLDivElement>&{value:string}) { const state=useContext(Context); return <div role='tabpanel' hidden={state.value!==value} {...props}>{children}</div> }
