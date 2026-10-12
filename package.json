@@ -13,8 +13,9 @@
     "release:check": "node scripts/check-release.mjs",
     "test:current-runtime": "node tests/current-runtime/test-tasks-native.mjs",
     "starter:check": "node scripts/check-starter.mjs",
-    "verify": "npm test && npm ci --prefix tests/current-runtime --ignore-scripts && npm run test:current-runtime && npm run lint && npm run starter:check && npm run build && npm run release:check",
-    "publish": "node publish.mjs"
+    "verify": "npm run test:publisher && npm test && npm ci --prefix tests/current-runtime --ignore-scripts && npm run test:current-runtime && npm run lint && npm run starter:check && npm run build && npm run release:check",
+    "publish": "node publish.mjs",
+    "test:publisher": "node --test scripts/publish-regression.mjs"
   },
   "dependencies": {
     "@agentshouse/app-bridge": "0.1.0-ce524f6608238",
