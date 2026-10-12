@@ -95,8 +95,6 @@ const runtime = {
 }
 const host = createHouseBridgeTestHost({ address: '/app/a_e.n' })
 host.attachRuntime(runtime)
-globalThis.houseBridge = window.houseBridge = host.port
-globalThis.houseRuntime = window.houseRuntime = host.runtime
 const server = await createServer({ server: { middlewareMode: true }, appType: 'custom', optimizeDeps: { noDiscovery: true, include: [] } })
 let root, container
 const trace = label => { if (process.env.CIRCLE_DEBUG) console.log(label, `${Math.round(process.memoryUsage().rss / 1024 / 1024)} MiB`) }

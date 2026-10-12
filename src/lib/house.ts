@@ -1,8 +1,8 @@
 import { DraftSession, type RoomDraft } from './task-draft'
-import { connectHouseBridge } from '@agentshouse/app-bridge'
+import { houseBridge } from '@agentshouse/app-bridge'
 import { taskSchema, taskFieldsSchema, type Task, type TaskFields } from '@/features/tasks/data/schema'
 
-type MdRuntimeClient = Awaited<ReturnType<typeof connectHouseBridge>['runtime']>
+type MdRuntimeClient = Awaited<ReturnType<typeof houseBridge>['runtime']>
 
 export type HouseRuntime = MdRuntimeClient
 export { type RoomDraft }
@@ -10,7 +10,7 @@ export { type RoomDraft }
 let connection: Promise<MdRuntimeClient> | undefined
 export function houseRuntime() {
   connection ??= (async () => {
-    const bridge = connectHouseBridge()
+    const bridge = houseBridge()
     bridge.setTab({ title: 'Tasks' })
     return bridge.runtime
   })()

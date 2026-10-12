@@ -48,14 +48,12 @@ try {
   }
   const host = createHouseBridgeTestHost({ address: '/app/a_e.n' })
   host.attachRuntime(md)
-  globalThis.houseBridge = host.port
-  globalThis.houseRuntime = host.runtime
+  assert.equal(Object.hasOwn(globalThis, 'houseRuntime'), false, 'The host injects only the bridge')
   const firstConnection = houseRuntime()
   assert.equal(firstConnection, houseRuntime(), 'The bridge connection is reused')
   assert.equal(await firstConnection, md, 'Use the exact runtime client supplied by the host')
   assert.deepEqual(host.tabs, [{ title: 'Tasks' }])
   delete globalThis.houseBridge
-  delete globalThis.houseRuntime
   await createTasks(md, task.room, [fields]); assert.equal(writes[0].parts.creation.type, 'task'); assert.equal(saves.length, 1)
   await updateTasks(md, [task], { status: 'done' }); assert.deepEqual(writes[1].parts.fields.status, { value: 'done', base: { value: 'todo' } })
   await deleteTasks(md, [task]); assert.equal(writes[2].parts.removal.base, '# Test task')

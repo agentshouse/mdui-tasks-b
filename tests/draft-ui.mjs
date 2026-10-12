@@ -31,7 +31,7 @@ const runtime={
  save:async(room,items)=>{saves.push({room,items});for(const item of items)drafts.delete(item.path);emitDrafts();return{outcome:'saved',identifier:'local-queue'}}
 }
 const host=createHouseBridgeTestHost({address:'/app/a_e.n'});host.attachRuntime(runtime)
-globalThis.houseBridge=window.houseBridge=host.port;globalThis.houseRuntime=window.houseRuntime=host.runtime
+
 const server=await createServer({server:{middlewareMode:true},appType:'custom',optimizeDeps:{noDiscovery:true,include:[]}})
 let root
 const flush=async()=>{await act(async()=>{for(let i=0;i<8;i++)await new Promise(resolve=>setImmediate(resolve))})}

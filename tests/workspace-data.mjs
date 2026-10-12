@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
-import {verify,validate,parse} from '../node_modules/@agentshouse/app-bridge/node_modules/@agentshouse/mdmodel/dist/index.js'
+import {verify,validate,parse} from '@agentshouse/mdmodel'
 const schema=fs.readFileSync('schema.yaml','utf8')
 const verified=verify(schema)
 assert.equal(verified.verdict,'accept',JSON.stringify(verified))
