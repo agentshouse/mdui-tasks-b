@@ -61,7 +61,7 @@ try {
   await assert.rejects(updateTasks({ ...md, roomDraft: { ...md.roomDraft, read: async () => ({ revision: 'other-tab' }) } }, [task], { status: 'done' }), /unfinished House draft/)
   assert.equal(writes.length, before)
   await assert.rejects(deleteTasks({ ...md, query: async (query) => { assertQueryPointers(query); return { documents: [{ room: task.room, path: task.path, fields: { ...task, title: 'New title' }, markdown: '# Test task' }] } } }, [task]), /changed/)
-  await assert.rejects(updateTasks({ ...md, save: async () => ({ outcome: 'refused', rule: 'changed-underneath' }) }, [task], { status: 'done' }), /changed-underneath/)
+  await assert.rejects(updateTasks({ ...md, save: async () => ({ outcome: 'refused', code: 'changed-underneath', retryable: false }) }, [task], { status: 'done' }), /changed-underneath/)
   const flush = async () => { for(let i=0;i<5;i++) await new Promise(resolve=>setImmediate(resolve)) }
   function signal(value) {
     const listeners=new Set();let closed=0

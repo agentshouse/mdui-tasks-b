@@ -79,7 +79,7 @@ export class DraftSession {
       const draft = this.draft;
       if (!draft) return null;
       const result = await this.runtime.save(this.room, [{ path: this.path, revision: draft.revision }]);
-      if (result.outcome !== 'saved') throw new Error(`House did not queue this draft: ${result.rule}. The draft is preserved.`);
+      if (result.outcome !== 'saved') throw new Error(`House did not queue this draft: ${result.code}. The draft is preserved.`);
       // Save clears the named revision only. Retain later typing from a tab.
       this.accept(await this.runtime.roomDraft.read(this.room, this.path));
       return result.identifier;

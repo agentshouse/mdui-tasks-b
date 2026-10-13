@@ -41,7 +41,7 @@ async function saveChanges(md: MdRuntimeClient, room: string, changes: { path: s
   }
   check()
   const answer = await md.save(room, drafts)
-  if (answer.outcome !== 'saved') throw new Error(`House did not save these changes: ${answer.rule}. Your Room draft has been kept.`)
+  if (answer.outcome !== 'saved') throw new Error(`House did not save these changes: ${answer.code}. Your Room draft has been kept.`)
 }
 export async function createTasks(md: MdRuntimeClient, room: string, inputs: TaskFields[], isAvailable: () => boolean = () => true) {
   const changes = inputs.map((input) => {
@@ -130,7 +130,7 @@ export function observeTaskSession(md: MdRuntimeClient, update: (value: TaskSess
   void watch(md.observe('sync-status'), value => { completed = typeof value.lastCompleted === 'string'; syncLabel = value.attentionRequired.length ? 'Some House changes need attention. Review the returned drafts before editing again.' : ''; reconcile() })
   void watch(md.observe('room-drafts'), value => { drafts = value; emit() })
   void watch(md.observe('service-mode'), value => { writeHalted = value === 'write-halted'; emit() })
-  void watch(md.observe('connection-refusal'), value => { fatal = value ? `House connection refused: ${value.reason}` : null; reconcile() })
+  void watch(md.observe('connection-refusal'), value => { fatal = value ? `House connection refused: ${value.code}` : null; reconcile() })
   return { currentRoom: () => !loading && !queryError ? currentRoom() : null, close() { disposed = true; generation++; stopQuery?.(); cleanup.forEach(close => close()) } }
 }
 

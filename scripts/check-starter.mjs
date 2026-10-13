@@ -1,3 +1,4 @@
+import { checkCurrentStarter } from './check-current-starter.mjs';
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -22,21 +23,13 @@ walk('starter')
 assert(Object.keys(documents).length >= 3, 'Starter documents missing.')
 const result = validate({ 'settings/schema.yaml': schema, ...documents }, { binaryTargets: [] }, model.model)
 assert.equal(result.verdict, 'accept', JSON.stringify(result))
-const tasks = JSON.parse(fs.readFileSync('tests/support/fixtures/donor-tasks.json', 'utf8'))
-const batches = fs.readdirSync('tests/support/whole-demo').filter(name => /^batch-\d+\.json$/.test(name)).flatMap(name => JSON.parse(fs.readFileSync(path.join('tests/support/whole-demo', name))).changes)
-const existing = new Map(batches.map(change => [change.path.replace('/rooms/tasks-pilot/', ''), change.content]))
+checkCurrentStarter(documents);
 const records = Object.entries(documents).map(([file, content]) => {
   const parsed = parse(content, file)
   assert.equal(parsed.ok, true, JSON.stringify(parsed))
-  if (parsed.document.type === 'task') {
-    const index = Number(file.match(/^tasks\/demo-(\d+)-task-\d+\.md$/)?.[1]) - 1
-    assert(index >= 0, 'Task starter must retain an existing demo path.')
-    assert.deepEqual(JSON.parse(JSON.stringify(parsed.document.fields)), { type: 'task', ...tasks[index] })
-    assert(file.endsWith(tasks[index].id.toLowerCase() + '.md'), 'Task starter path changed.')
-  } else assert.equal(content, existing.get(file), 'Starter must preserve the existing demo document verbatim.')
   return parsed.document
 })
 for (const record of records.filter(record => record.type === 'chat-message')) {
   assert(records.some(candidate => candidate.type === 'conversation' && candidate.fields.id === record.fields.conversation), 'Message references a missing conversation.')
 }
-console.log(`PASS: ${records.length} existing starter documents accepted by schema, with original paths and conversation closure.`)
+console.log(`PASS: ${records.length} current Starter documents accepted by schema, with committed paths and conversation closure.`)

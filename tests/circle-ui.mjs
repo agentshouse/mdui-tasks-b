@@ -75,7 +75,7 @@ const runtime = {
     },
   },
   save: async (targetRoom, items) => {
-    if (saveFailure) return { outcome: 'refused', rule: saveFailure }
+    if (saveFailure) return { outcome: 'refused', code: saveFailure, retryable: false }
     saves.push({ room: targetRoom, items: structuredClone(items) })
     for (const item of items) {
       const draft = drafts.get(key(targetRoom, item.path))

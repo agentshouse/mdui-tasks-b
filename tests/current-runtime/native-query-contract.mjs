@@ -11,8 +11,8 @@ const { createReadSide } = await load('mdruntime', 'read-side.js')
 const { rowsOf } = await load('mdruntime', 'rows.js')
 
 export { planOf }
-export const runtimeVersion = '0.1.0-c2647c1a232dd'
-export const modelVersion = '0.1.0-c0bdbbc92d020'
+export const runtimeVersion = '0.1.0-c8ca66ac9e99d'
+export const modelVersion = '0.1.0-c6e675bb19980'
 for (const [name, expected] of [['mdruntime', runtimeVersion], ['mdmodel', modelVersion]]) {
   const metadata = JSON.parse(readFileSync(path.join(root, 'node_modules', '@agentshouse', name, 'package.json'), 'utf8'))
   assert.equal(metadata.version, expected, `This regression requires pinned official ${name} ${expected}`)

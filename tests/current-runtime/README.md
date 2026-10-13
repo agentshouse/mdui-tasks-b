@@ -2,8 +2,8 @@
 
 This isolated **test-only** dependency closure uses official npm packages:
 
-- `@agentshouse/mdruntime` `0.1.0-c2647c1a232dd`
-- `@agentshouse/mdmodel` `0.1.0-c0bdbbc92d020` (Runtime's exact dependency)
+- `@agentshouse/mdruntime` `0.1.0-c8ca66ac9e99d`
+- `@agentshouse/mdmodel` `0.1.0-c6e675bb19980` (Runtime's exact dependency)
 
 The complete transitive resolution and SHA-512 integrity values are retained in
 `package-lock.json`. No application package files were modified by this setup.
@@ -60,7 +60,7 @@ Within installed `@agentshouse/mdruntime`:
 - `dist/read-side.js:182–244`: original-key/nested pointer projection.
 
 Registry source:
-https://registry.npmjs.org/@agentshouse/mdruntime/-/mdruntime-0.1.0-c2647c1a232dd.tgz
+https://registry.npmjs.org/@agentshouse/mdruntime/-/mdruntime-0.1.0-c8ca66ac9e99d.tgz
 
 The reported host source commit `8c14b5eb8` is not an npm package version;
 this pinned published package independently implements the announced contract.
