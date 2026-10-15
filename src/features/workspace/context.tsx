@@ -26,7 +26,9 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
           if (disposed || generation !== expected) { observation.close(); return }
           const render = () => {
             if (disposed || generation !== expected) return
-            setRecords(observation.current().documents.map(document => ({ room: document.room, path: document.path, type: document.type ?? '', fields: { ...document.fields }, lastSavedBy: document.change?.author?.name } )))
+            const result = observation.current()
+            if ('pending' in result) return
+            setRecords(result.documents.map(document => ({ room: document.room, path: document.path, type: document.type ?? '', fields: { ...document.fields }, lastSavedBy: document.change?.author?.name } )))
           }
           render(); const unsubscribe = observation.subscribe(render)
           stopQuery = () => { unsubscribe(); observation.close() }

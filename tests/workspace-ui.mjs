@@ -43,5 +43,6 @@ try{
  assert.equal(saves.length,1);assert(records.some(record=>record.type==='chat-message'&&record.fields.message==='Other tab typed this'));assert.equal(document.querySelector('[data-module="chats"] input[placeholder="Type your messages..."]').value,'','Send queues the message and opens a new composition')
  await input('Next message');assert.equal([...drafts.values()].filter(draft=>draft.parts.creation?.type==='chat-message').length,1)
  const draftCount=drafts.size;await act(async()=>signals.rooms.emit([]));await flush();assert.equal(document.querySelector('[data-module="chats"] button[aria-label="Send to Room"]').disabled,true);assert.equal(drafts.size,draftCount)
+ await act(async()=>signals.query.emit({pending:[{room,awaits:'index'}]}));await flush();assert.match(document.querySelector('[data-module="users"]').textContent,/Page 1 of 50/,'A pending query preserves the last completed workspace records')
  console.log('PASS: six mounted donor modules, instant local navigation with no extra queries, all 500 users/15 Apps/metrics, no portrait fetch, actual chat-message drafts, cross-tab redraw, reload hydration, explicit Room Send under provider halt, new composition, and reach-loss protection.')
 }finally{if(root)await act(async()=>root.unmount());await server.close();await window.happyDOM.abort()}
